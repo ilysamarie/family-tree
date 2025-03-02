@@ -85,33 +85,37 @@ var sisters = [
   },
   {
     "name": "Rebecca Peters",
+    "big": "Fawn Romanko",
     "pledgeclass": "Tau",
     "graduated": true
   },
   {
     "name": "Jocelyn Connolly",
+    "big": "Nicole Holtz",
     "pledgeclass": "Upsilon",
     "graduated": true
   },
   {
     "name": "Paige Donnell",
+    "big": "Rebecca Peters",
     "pledgeclass": "Phi",
     "graduated": true
   },
   {
     "name": "Heather Piezala",
+    "big": "Jocelyn Connolly",
     "pledgeclass": "Phi",
     "graduated": true
   },
   {
     "name": "Tori Johnson",
+    "big": "Heather Piezala",
     "graduated": true
   },
   {
     "name": "Alana Bruski",
     "big": "Tori Johnson",
-    "graduated": true,
-    "familystarted": "Muses"
+    "graduated": true
   },
   {
     "name": "Cathy Lu",
@@ -264,6 +268,7 @@ var sisters = [
   },
   {
     "name": "Sarah Paschl",
+    "big": "Alana Bruski",
     "graduated": true,
     "familystarted": "Muses"
   },
