@@ -3,7 +3,7 @@
   src: url("../fonts/junction-regular/Junction.otf") format("opentype");
 }
 body {
-  background: #070707;
+  background: #ffffff;
   font-family: Junction, sans;
   text-align: center;
 }
@@ -12,7 +12,7 @@ body {
   position: absolute;
   top: 0; bottom: 0; left: 0; right: 0;
 
-  background-image: url("../resources/thetachiflagmodified.jpg");
+  /* background-image: url("../resources/thetachiflagmodified.jpg"); */
   background-size: 100%;
   border: 1px solid lightgrey;
 }
