@@ -108,6 +108,10 @@ function createNodes(sisters_) {
           familyColor[lowerCaseFamily] = getNewFamilyColor();
         }
 
+      // Determine if the text color should be white or black based on brightness
+      var bgColor = tinycolor(familyColor[lowerCaseFamily]);
+      var textColor = bgColor.isDark() ? "#ffffff" : "#000000";  
+
 
       // Create a root for that family
       var newNode = {
@@ -116,7 +120,7 @@ function createNodes(sisters_) {
         label: sis.familystarted,
         family: lowerCaseFamily,
         inactive: true, // a family does not count as an active undergraduate
-        font: { size: 50 }, // super-size the font
+        font: { size: 50, color: textColor }, // super-size the font
       };
       familyToNode[lowerCaseFamily] = newNode;
       nodes.push(newNode);
