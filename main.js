@@ -141,6 +141,7 @@ function createNodes(sisters_) {
         label: '[' + sis.name + ']',
         family: sis.familystarted.toLowerCase(),
         shape: "box",
+        font: { color: textColor },  // Apply white text for dark backgrounds
       }));
 
       // Node underneath the new family. This is a "real" node: just like any
