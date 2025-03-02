@@ -140,7 +140,7 @@ function createNodes(sisters_) {
         name: '', // some unsearchable name.
         label: '[' + sis.name + ']',
         family: sis.familystarted.toLowerCase(),
-        shape = "box"
+        shape: "box",
       }));
 
       // Node underneath the new family. This is a "real" node: just like any
