@@ -3,7 +3,7 @@
   src: url("../fonts/junction-regular/Junction.otf") format("opentype");
 }
 body {
-  background: #ffffff;
+  background: #f5f5f5;
   font-family: Junction, sans;
   text-align: center;
 }
