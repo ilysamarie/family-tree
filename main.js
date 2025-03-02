@@ -140,6 +140,7 @@ function createNodes(sisters_) {
         name: '', // some unsearchable name.
         label: '[' + sis.name + ']',
         family: sis.familystarted.toLowerCase(),
+        shape = "box"
       }));
 
       // Node underneath the new family. This is a "real" node: just like any
@@ -171,6 +172,7 @@ function createNodes(sisters_) {
 
     sis.label = sis.name; // Display the name in the graph
 
+    sis.shape = "box"; // Make all nodes square
     nodes.push(sis); // Add this to the list of nodes to display
   }
 
