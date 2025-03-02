@@ -1,7 +1,7 @@
 {
   "name": "framily-tree",
   "version": "0.1.0",
-  "description": "A fraternity family tree",
+  "description": "A sorority family tree",
   "main": "index.js",
   "scripts": {
     "posttest": "npm run lint",
@@ -13,11 +13,11 @@
     "easyMode": "npm install && npm run getData && git commit -am 'Update data' && git push && npm run deploy"
   },
   "keywords": [
-    "fraternity",
+    "sorority",
     "family",
     "tree"
   ],
-  "author": "Nate Fischer <ntfschr@gmail.com>",
+  "author": "Ilysa Sanchez-Perez <ilysamariesp@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "didyoumean": "^1.2.2",
