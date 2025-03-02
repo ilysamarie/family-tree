@@ -1,4 +1,4 @@
-# Framily tree
+# Family tree
 
 [![GitHub Actions][Actions badge]][GitHub Workflow]
 [![Codecov][Codecov badge]][Codecov link]
@@ -24,17 +24,17 @@ a [google spreadsheet].
 
 ## How does it work?
 
-Check out the [design overview](https://github.com/ilysamarie/framily-tree/wiki/Design).
+Check out the [design overview](https://github.com/ilysamarie/family-tree/wiki/Design).
 
 ## Maintaining this family tree
 
 Updating the data? Adding new members to the tree? See the instructions
-[here](https://github.com/ilysamarie/framily-tree/wiki/Updating-data-(adding-new-members)).
+[here](https://github.com/ilysamarie/family-tree/wiki/Updating-data-(adding-new-members)).
 
 ## Creating your own family tree
 
 Check out the [forking
-instructions](https://github.com/ilysamarie/framily-tree/wiki/Forking-instructions).
+instructions](https://github.com/ilysamarie/family-tree/wiki/Forking-instructions).
 
 ## License
 
@@ -51,9 +51,9 @@ property of Theta Chi Fraternity Beta Alpha chapter and its initiates.
   your project:
 -->
 
-[Actions badge]: https://img.shields.io/github/actions/workflow/status/ilysamarie/framily-tree/main.yml?style=flat-square&logo=github
-[GitHub Workflow]: https://github.com/ilysamarie/framily-tree/actions/workflows/main.yml
-[GitHub Pages]: https://ilysamarie.github.io/framily-tree
-[Codecov badge]: https://img.shields.io/codecov/c/github/ilysamarie/framily-tree/main.svg?style=flat-square&label=coverage
-[Codecov link]: https://codecov.io/gh/ilysamarie/framily-tree
+[Actions badge]: https://img.shields.io/github/actions/workflow/status/ilysamarie/family-tree/main.yml?style=flat-square&logo=github
+[GitHub Workflow]: https://github.com/ilysamarie/family-tree/actions/workflows/main.yml
+[GitHub Pages]: https://ilysamarie.github.io/family-tree
+[Codecov badge]: https://img.shields.io/codecov/c/github/ilysamarie/family-tree/main.svg?style=flat-square&label=coverage
+[Codecov link]: https://codecov.io/gh/ilysamarie/family-tree
 [google spreadsheet]: https://docs.google.com/spreadsheets/d/1h6dVJKtETWX3Kr9PT6EaLu0gGavdi8Gnj4IlX155pfY/edit?usp=sharing
