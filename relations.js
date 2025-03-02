@@ -73,11 +73,13 @@ var sisters = [
   },
   {
     "name": "Fawn Romanko",
+    "big": "Alyssa Joslin",
     "pledgeclass": "Sigma",
     "graduated": true
   },
   {
     "name": "Nicole Holtz",
+    "big": "Alyssa Joslin",
     "pledgeclass": "Sigma",
     "graduated": true
   },
@@ -108,7 +110,8 @@ var sisters = [
   {
     "name": "Alana Bruski",
     "big": "Tori Johnson",
-    "graduated": true
+    "graduated": true,
+    "familystarted": "Muses"
   },
   {
     "name": "Cathy Lu",
@@ -261,7 +264,8 @@ var sisters = [
   },
   {
     "name": "Sarah Paschl",
-    "graduated": true
+    "graduated": true,
+    "familystarted": "Muses"
   },
   {
     "name": "Cayle Klubert",
