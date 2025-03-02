@@ -321,6 +321,12 @@ function draw() {
 
   var changeColor;
   var colorMethod = document.getElementById('layout').value;
+  var legendContainer = document.getElementById('legend');
+
+  // Clear existing legend content
+  legendContainer.innerHTML = "";
+
+
   switch (colorMethod) {
     case 'active':
       changeColor = function (node) {
@@ -331,10 +337,34 @@ function draw() {
       break;
     case 'pledgeClass':
       changeColor = function (node) {
-        node.color = node.pledgeclass
-          ? pledgeClassColorGlobal[node.pledgeclass.toLowerCase()]
-          : 'lightgrey';
-        nodesDataSet.update(node);
+        if (node.pledgeclass) {
+          let classColor = pledgeClassColorGlobal[node.pledgeclass.toLowerCase()] || 'lightgrey';
+          node.color = classColor;
+          nodesDataSet.update(node);
+
+          // Add the pledge class to the legend if not already added
+          if (!document.getElementById(`legend-${node.pledgeclass}`)) {
+            let legendItem = document.createElement("div");
+            legendItem.id = `legend-${node.pledgeclass}`;
+            legendItem.style.display = "flex";
+            legendItem.style.alignItems = "center";
+            legendItem.style.marginBottom = "5px";
+
+            let colorBox = document.createElement("div");
+            colorBox.style.width = "15px";
+            colorBox.style.height = "15px";
+            colorBox.style.backgroundColor = classColor;
+            colorBox.style.marginRight = "10px";
+            colorBox.style.border = "1px solid black";
+
+            let labelText = document.createElement("span");
+            labelText.innerText = node.pledgeclass;
+
+            legendItem.appendChild(colorBox);
+            legendItem.appendChild(labelText);
+            legendContainer.appendChild(legendItem);
+          }
+        }
       };
       break;
     default: // 'family'
