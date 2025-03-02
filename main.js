@@ -101,8 +101,13 @@ function createNodes(sisters_) {
 
     var lowerCaseFamily = (sis.familystarted || '').toLowerCase();
     if (lowerCaseFamily && !familyColor[lowerCaseFamily]) {
-      // Add a new family
-      familyColor[lowerCaseFamily] = getNewFamilyColor();
+      if (lowerCaseFamily === "muses") {
+          familyColor[lowerCaseFamily] = "#2d6a4f";  // Assign custom color for "Muses"
+        } else {
+          // Add a new family
+          familyColor[lowerCaseFamily] = getNewFamilyColor();
+        }
+
 
       // Create a root for that family
       var newNode = {
