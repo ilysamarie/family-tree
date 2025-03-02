@@ -269,8 +269,7 @@ var sisters = [
   {
     "name": "Sarah Paschl",
     "big": "Alana Bruski",
-    "graduated": true,
-    "familystarted": "Muses"
+    "graduated": true
   },
   {
     "name": "Cayle Klubert",
