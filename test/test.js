@@ -4,7 +4,7 @@ var should = require('should');
 
 var main = require('../main');
 
-describe('framily-tree', function () {
+describe('family-tree', function () {
   it('can parse actual JSON data without error', function () {
     main.createNodesHelper();
   });
@@ -13,7 +13,7 @@ describe('framily-tree', function () {
     var state = {};
 
     beforeEach(function () {
-      var brothers = [
+      var sisters = [
         {
           'name': 'Joe Smith',
           'graduated': true,
@@ -35,70 +35,70 @@ describe('framily-tree', function () {
           'graduated': true
         },
       ];
-      var output = main.createNodes(brothers);
+      var output = main.createNodes(sisters);
       state.nodes = output[0];
       state.edges = output[1];
     });
 
     it('returns undefined if no match', function () {
-      var result = main.findBrother('This will not match', state.nodes);
+      var result = main.findSister('This will not match', state.nodes);
       should(result).equal(undefined);
     });
 
     it('can find exact match', function () {
-      var result = main.findBrother('Joe Smith', state.nodes);
+      var result = main.findSister('Joe Smith', state.nodes);
       result.name.should.equal('Joe Smith');
-      result = main.findBrother('Alex Brown', state.nodes);
+      result = main.findSister('Alex Brown', state.nodes);
       result.name.should.equal('Alex Brown');
     });
 
     it('can find case-insensitive match', function () {
-      var result = main.findBrother('JoE SmItH', state.nodes);
+      var result = main.findSister('JoE SmItH', state.nodes);
       result.name.should.equal('Joe Smith');
-      result = main.findBrother('AlEx bRoWn', state.nodes);
+      result = main.findSister('AlEx bRoWn', state.nodes);
       result.name.should.equal('Alex Brown');
     });
 
     it('can match by first name', function () {
-      var result = main.findBrother('Joe', state.nodes);
+      var result = main.findSister('Joe', state.nodes);
       result.name.should.equal('Joe Smith');
-      result = main.findBrother('Alex', state.nodes);
+      result = main.findSister('Alex', state.nodes);
       result.name.should.equal('Alex Brown');
     });
 
     it('can match by substring', function () {
-      var result = main.findBrother('Joe S', state.nodes);
+      var result = main.findSister('Joe S', state.nodes);
       result.name.should.equal('Joe Smith');
-      result = main.findBrother('Al', state.nodes);
+      result = main.findSister('Al', state.nodes);
       result.name.should.equal('Alex Brown');
     });
 
     it('advances through multiple matches (default = FORWARD)', function () {
-      var result = main.findBrother('Joe', state.nodes, '');
+      var result = main.findSister('Joe', state.nodes, '');
       result.name.should.equal('Joe Smith');
       // Advance to the next match.
-      result = main.findBrother('Joe', state.nodes, result);
+      result = main.findSister('Joe', state.nodes, result);
       result.name.should.equal('Joe Grandsmith');
       // Advance to the next match.
-      result = main.findBrother('Joe', state.nodes, result);
+      result = main.findSister('Joe', state.nodes, result);
       result.name.should.equal('Joe Smithson');
       // And it also wraps around to the start of the matches.
-      result = main.findBrother('Joe', state.nodes, result);
+      result = main.findSister('Joe', state.nodes, result);
       result.name.should.equal('Joe Smith');
     });
 
     it('advances backward through multiple matches', function () {
       var BACKWARD = main.DIRECTION.BACKWARD;
-      var result = main.findBrother('Joe', state.nodes, '', BACKWARD);
+      var result = main.findSister('Joe', state.nodes, '', BACKWARD);
       result.name.should.equal('Joe Smith');
       // Advance to the previous match (wrap around to the end).
-      result = main.findBrother('Joe', state.nodes, result, BACKWARD);
+      result = main.findSister('Joe', state.nodes, result, BACKWARD);
       result.name.should.equal('Joe Grandsmith');
       // Advance to the previous match.
-      result = main.findBrother('Joe', state.nodes, result, BACKWARD);
+      result = main.findSister('Joe', state.nodes, result, BACKWARD);
       result.name.should.equal('Joe Smithson');
       // Advance back to the first match.
-      result = main.findBrother('Joe', state.nodes, result, BACKWARD);
+      result = main.findSister('Joe', state.nodes, result, BACKWARD);
       result.name.should.equal('Joe Smith');
     });
   });

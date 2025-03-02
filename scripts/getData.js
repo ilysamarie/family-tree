@@ -3,7 +3,7 @@ var extractSheets = require('spreadsheet-to-json').extractSheets;
 var fs = require('fs');
 
 // Forking instructions: if you are forking this project for your own
-// fraternity, you will need to change the SPREADSHEET_ID to match the URL of
+// sorority, you will need to change the SPREADSHEET_ID to match the URL of
 // your new Google spreadsheet:
 var SPREADSHEET_ID = '1tRmOfSteRWWiBPSxlW7Mn3OXoqnwd-RyHyD8lb0jA4I';
 
@@ -32,31 +32,31 @@ function (err, result) {
 
   // We only need the data from Sheet1.
   result = result.Sheet1;
-  result = result.map(function (bro) {
-    if (bro.familyStarted) {
-      bro.familystarted = bro.familyStarted;
-      delete bro.familyStarted;
+  result = result.map(function (sis) {
+    if (sis.familyStarted) {
+      sis.familystarted = sis.familyStarted;
+      delete sis.familyStarted;
     }
     // Un-stringify booleans.
-    Object.keys(bro).forEach(function (key) {
-      if (bro[key] === 'TRUE') {
-        bro[key] = true;
+    Object.keys(sis).forEach(function (key) {
+      if (sis[key] === 'TRUE') {
+        sis[key] = true;
       }
     });
     // Remove empty fields as a storage and readability optimization.
-    Object.keys(bro).forEach(function (key) {
-      if (bro[key] === null || bro[key] === undefined) {
-        delete bro[key];
+    Object.keys(sis).forEach(function (key) {
+      if (sis[key] === null || sis[key] === undefined) {
+        delete sis[key];
       }
     });
-    return bro;
+    return sis;
   });
 
-  var str = 'var brothers = ' + JSON.stringify(result, undefined, 2) + ';\n';
+  var str = 'var sisters = ' + JSON.stringify(result, undefined, 2) + ';\n';
   // Turn this into a node module that we can `require()` for testing.
   str += '/* istanbul ignore else */\n'
        + "if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {\n"
-       + '  module.exports = brothers;\n'
+       + '  module.exports = sisters;\n'
        + '}\n';
   fs.writeFileSync('relations.js', str);
 })

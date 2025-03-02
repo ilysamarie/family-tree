@@ -1,4 +1,4 @@
-var brothers = [
+var sisters = [
   {
     "name": "Nicolette Yovanof",
     "pledgeclass": "Alpha",
@@ -293,5 +293,5 @@ var brothers = [
 ];
 /* istanbul ignore else */
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports = brothers;
+  module.exports = sisters;
 }
