@@ -135,12 +135,21 @@ function createNodes(sisters_) {
       // the tree, however you can't search for it and it won't have any little
       // siss.
       edges.push({ from: sis.big, to: newIdx });
+
+      // Get the family color for this sister
+      var sisterColor = familyColor[lowerCaseFamily] || "#cccccc"; // Default to grey if missing
+
+      // Determine if the text color should be white or black based on background brightness
+      var bgColor = tinycolor(sisterColor);
+      var textColor = bgColor.isDark() ? "#ffffff" : "#000000";
+
       nodes.push(Object.assign({}, sis, {
         id: newIdx++, // increment
-        name: '', // some unsearchable name.
-        label: '[' + sis.name + ']',
-        family: sis.familystarted.toLowerCase(),
+        name: sis.name,
+        label: sis.name,
+        family: lowerCaseFamily,
         shape: "box",
+        color: sisterColor,  // Set background color
         font: { color: textColor },  // Apply white text for dark backgrounds
       }));
 
@@ -322,7 +331,7 @@ function draw() {
 
   var changeColor;
   var colorMethod = document.getElementById('layout').value;
-  var legendContainer = document.getElementById('legend');
+  var legendContainer = document.getElementById('legend-container');
   var legend = document.getElementById('legend');
 
   // Clear existing legend content
@@ -339,7 +348,7 @@ function draw() {
     case 'active':
       changeColor = function (node) {
         let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
-        let classColor = node.pledgeclass ? (pledgeClassColorGlobal[className] || naColor) : naColor;
+        let classColor = node.pledgeclass ? (pledgeClassColorGlobal[className] || "lightgrey") : "lightgrey";
         
         // Determine text color based on background brightness
         let bgColor = tinycolor(classColor);
@@ -353,39 +362,45 @@ function draw() {
       break;
       case 'pledgeClass':
         let seenClasses = new Set(); // Keep track of already added pledge classes
-        let naColor = "lightgrey";  // Color for "N/A"
-  
-        changeColor = function (node) {
-          let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
-          let classColor = node.pledgeclass ? (pledgeClassColorGlobal[className] || naColor) : naColor;
-          node.color = classColor;
-          nodesDataSet.update(node);
-  
-          // Only add to legend if it's not already included
-          if (!seenClasses.has(className)) {
-            let legendItem = document.createElement("div");
-            legendItem.style.display = "flex";
-            legendItem.style.alignItems = "center";
-            legendItem.style.marginBottom = "5px";
-  
-            let colorBox = document.createElement("div");
-            colorBox.style.width = "15px";
-            colorBox.style.height = "15px";
-            colorBox.style.backgroundColor = classColor;
-            colorBox.style.marginRight = "10px";
-            colorBox.style.border = "1px solid black";
-  
-            let labelText = document.createElement("span");
-            labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
-  
-            legendItem.appendChild(colorBox);
-            legendItem.appendChild(labelText);
-            legend.appendChild(legendItem);
-  
-            seenClasses.add(className);
-          }
-        };
-        break;
+      let naColor = "lightgrey";  // Color for "N/A"
+
+      changeColor = function (node) {
+        let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
+        let classColor = node.pledgeclass ? (pledgeClassColorGlobal[className] || naColor) : naColor;
+        
+        // Determine text color based on brightness
+        let bgColor = tinycolor(classColor);
+        let textColor = bgColor.isDark() ? "#ffffff" : "#000000";
+
+        node.color = classColor;
+        node.font = { color: textColor }; // Apply white text for dark colors
+        nodesDataSet.update(node);
+
+        // Only add to legend if it's not already included
+        if (!seenClasses.has(className)) {
+          let legendItem = document.createElement("div");
+          legendItem.style.display = "flex";
+          legendItem.style.alignItems = "center";
+          legendItem.style.marginBottom = "5px";
+
+          let colorBox = document.createElement("div");
+          colorBox.style.width = "15px";
+          colorBox.style.height = "15px";
+          colorBox.style.backgroundColor = classColor;
+          colorBox.style.marginRight = "10px";
+          colorBox.style.border = "1px solid black";
+
+          let labelText = document.createElement("span");
+          labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
+
+          legendItem.appendChild(colorBox);
+          legendItem.appendChild(labelText);
+          legend.appendChild(legendItem);
+
+          seenClasses.add(className);
+        }
+      };
+      break;
     default: // 'family'
       changeColor = function (node) {
         node.color = familyColorGlobal[node.family.toLowerCase()];
