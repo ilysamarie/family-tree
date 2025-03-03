@@ -365,7 +365,7 @@ function draw() {
 
       case 'pledgeClass':
         let seenClasses = new Set(); // Track unique pledge classes
-        let naColor = "lightgrey";  // Default for "N/A"
+        let naColor = "#D3D3D3";  // Light grey for "N/A"
 
         // Clear and show legend only when in Pledge Class mode
         legend.innerHTML = "";
@@ -374,17 +374,17 @@ function draw() {
         changeColor = function (node) {
             let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
 
-            // Ensure each pledge class gets a unique color
-            if (!pledgeClassColorGlobal[className]) {
+            // Assign a unique color for each pledge class, defaulting to light grey if missing
+            if (!pledgeClassColorGlobal[className] && className !== "N/A") {
                 pledgeClassColorGlobal[className] = getNewPledgeClassColor();
             }
 
-            let classColor = pledgeClassColorGlobal[className] || naColor;
+            let classColor = className === "N/A" ? naColor : pledgeClassColorGlobal[className];
             let bgColor = tinycolor(classColor);
             let textColor = bgColor.isDark() ? "#ffffff" : "#000000"; // White text for dark colors
 
-            node.color = classColor; // Apply correct pledge class color
-            node.font = { color: textColor }; // Apply text color dynamically
+            node.color = classColor;
+            node.font = { color: textColor }; // Apply dynamic text color
             nodesDataSet.update(node);
 
             // Add unique pledge class colors to the legend
@@ -414,6 +414,7 @@ function draw() {
 
         nodesGlobal.forEach(changeColor); // Apply pledge class colors
         break;
+
 
     default: // 'family'
     case 'family':
