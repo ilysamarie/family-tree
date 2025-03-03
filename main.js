@@ -336,6 +336,11 @@ function draw() {
 
   // Clear existing legend content
   legend.innerHTML = "";
+  if (colorMethod = pledgeclass) {
+    legendContainer.style.display = "block";
+    } else {
+        legendContainer.style.display = "none";
+    }
 
 
   switch (colorMethod) {

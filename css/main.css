@@ -54,7 +54,7 @@ div.stretchy-wrapper {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   max-width: 250px;
   font-family: Arial, sans-serif;
-  display: none; /* Hide by default */
+  display: block;
 }
 
 #legend div {
