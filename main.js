@@ -403,14 +403,6 @@ function draw() {
           }
       };
       nodesGlobal.forEach(changeColor); // Apply pledge class colors
-
-      // Ensure legend is only shown if there are items in it
-      if (legend.children.length > 0) {
-          legendContainer.style.display = "block";
-      } else {
-          console.warn("Legend is empty – no pledge classes detected.");
-          legendContainer.style.display = "none"; // Hide if empty
-      }
       break;
 
 
