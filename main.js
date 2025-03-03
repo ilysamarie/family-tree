@@ -336,12 +336,13 @@ function draw() {
 
   // Clear existing legend content
   legend.innerHTML = "";
-  if (colorMethod = pledgeclass) {
+
+  // Show legend only if in pledge class view
+  if (colorMethod == "pledgeclass") {
     legendContainer.style.display = "block";
     } else {
         legendContainer.style.display = "none";
     }
-
 
   switch (colorMethod) {
     case 'active':
@@ -364,8 +365,7 @@ function draw() {
       let seenClasses = new Set(); // Track unique pledge classes
       let naColor = "#D3D3D3";  // Light grey for "N/A"
 
-      // Clear and show legend only when in Pledge Class mode
-      legend.innerHTML = "";
+      legend.innerHTML = "<h3>Pledge Class Legend</h3>"; // Add a title for visibility
 
       changeColor = function (node) {
           let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
@@ -385,27 +385,27 @@ function draw() {
 
           // Add unique pledge class colors to the legend
           if (!seenClasses.has(className)) {
-              let legendItem = document.createElement("div");
-              legendItem.style.display = "flex";
-              legendItem.style.alignItems = "center";
-              legendItem.style.marginBottom = "5px";
+            let legendItem = document.createElement("div");
+            legendItem.style.display = "flex";
+            legendItem.style.alignItems = "center";
+            legendItem.style.marginBottom = "5px";
 
-              let colorBox = document.createElement("div");
-              colorBox.style.width = "15px";
-              colorBox.style.height = "15px";
-              colorBox.style.backgroundColor = classColor;
-              colorBox.style.marginRight = "10px";
-              colorBox.style.border = "1px solid black";
+            let colorBox = document.createElement("div");
+            colorBox.style.width = "15px";
+            colorBox.style.height = "15px";
+            colorBox.style.backgroundColor = classColor;
+            colorBox.style.marginRight = "10px";
+            colorBox.style.border = "1px solid black";
 
-              let labelText = document.createElement("span");
-              labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
+            let labelText = document.createElement("span");
+            labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
 
-              legendItem.appendChild(colorBox);
-              legendItem.appendChild(labelText);
-              legend.appendChild(legendItem);
+            legendItem.appendChild(colorBox);
+            legendItem.appendChild(labelText);
+            legend.appendChild(legendItem);
 
-              seenClasses.add(className);
-          }
+            seenClasses.add(className);
+        }
       };
       nodesGlobal.forEach(changeColor); // Apply pledge class colors
       break;
