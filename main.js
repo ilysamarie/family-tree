@@ -412,9 +412,15 @@ function draw() {
       break;
 
     default: // 'family'
+    case 'family':
       changeColor = function (node) {
-        node.color = familyColorGlobal[node.family.toLowerCase()];
-        nodesDataSet.update(node);
+          let familyColor = familyColorGlobal[node.family.toLowerCase()];
+          let bgColor = tinycolor(familyColor);
+          let textColor = bgColor.isDark() ? "#ffffff" : "#000000"; // White text for dark backgrounds
+  
+          node.color = familyColor;
+          node.font = { color: textColor }; // Update text color dynamically
+          nodesDataSet.update(node);
       };
       break;
   }
