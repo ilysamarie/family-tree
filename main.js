@@ -337,14 +337,6 @@ function draw() {
   // Clear existing legend content
   legendContainer.innerHTML = "";
 
-  // Ensure legend container is only visible in pledge class mode
-  if (colorMethod === 'pledgeClass') {
-    legendContainer.style.display = "block"; // Show legend only for pledge class view
-  } else {
-    legendContainer.style.display = "none"; // Hide legend for other views
-  }
-
-
 
   switch (colorMethod) {
     case 'active':
@@ -369,7 +361,6 @@ function draw() {
 
         // Clear and show legend only when in Pledge Class mode
         legend.innerHTML = "";
-        legendContainer.style.display = "block";  // Ensure legend is visible
 
         changeColor = function (node) {
             let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
@@ -412,15 +403,9 @@ function draw() {
             }
         };
 
-        // Ensure colors are applied before updating the legend
-        nodesGlobal.forEach(changeColor);
-
-        // Final check: ensure legendContainer is visible
-        if (legend.children.length > 0) {
-            legendContainer.style.display = "block"; // Only show if items exist
-        } else {
-            console.warn("Legend is empty – no pledge classes detected.");
-        }
+        // Ensure legend container is properly shown
+        legendContainer.style.display = "block";
+        nodesGlobal.forEach(changeColor); // Apply pledge class colors
         break;
 
 
