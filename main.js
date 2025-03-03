@@ -335,7 +335,7 @@ function draw() {
   var legend = document.getElementById('legend');
 
   // Clear existing legend content
-  legendContainer.innerHTML = "";
+  legend.innerHTML = "";
   legendContainer.style.display = "block"; // Ensure legend is shown
   legendContainer.style.border = "1px solid black"; // Make sure it's visible
 
