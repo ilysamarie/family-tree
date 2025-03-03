@@ -327,6 +327,14 @@ function draw() {
   // Clear existing legend content
   legendContainer.innerHTML = "";
 
+  // Ensure legend container is only visible in pledge class mode
+  if (colorMethod === 'pledgeClass') {
+    legendContainer.style.display = "block"; // Show legend only for pledge class view
+  } else {
+    legendContainer.style.display = "none"; // Hide legend for other views
+  }
+
+
 
   switch (colorMethod) {
     case 'active':
