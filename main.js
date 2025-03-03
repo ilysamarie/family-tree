@@ -362,7 +362,7 @@ function draw() {
       break;
       case 'pledgeClass':
         let seenClasses = new Set(); // Keep track of already added pledge classes
-      let naColor = "lightgrey";  // Color for "N/A"
+        let naColor = "lightgrey";  // Color for "N/A"
 
       changeColor = function (node) {
         let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
@@ -379,25 +379,25 @@ function draw() {
         // Only add to legend if it's not already included
         if (!seenClasses.has(className)) {
           let legendItem = document.createElement("div");
-          legendItem.style.display = "flex";
-          legendItem.style.alignItems = "center";
-          legendItem.style.marginBottom = "5px";
+            legendItem.style.display = "flex";
+            legendItem.style.alignItems = "center";
+            legendItem.style.marginBottom = "5px";
 
-          let colorBox = document.createElement("div");
-          colorBox.style.width = "15px";
-          colorBox.style.height = "15px";
-          colorBox.style.backgroundColor = classColor;
-          colorBox.style.marginRight = "10px";
-          colorBox.style.border = "1px solid black";
+            let colorBox = document.createElement("div");
+            colorBox.style.width = "15px";
+            colorBox.style.height = "15px";
+            colorBox.style.backgroundColor = classColor;
+            colorBox.style.marginRight = "10px";
+            colorBox.style.border = "1px solid black";
 
-          let labelText = document.createElement("span");
-          labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
+            let labelText = document.createElement("span");
+            labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
 
-          legendItem.appendChild(colorBox);
-          legendItem.appendChild(labelText);
-          legend.appendChild(legendItem);
+            legendItem.appendChild(colorBox);
+            legendItem.appendChild(labelText);
+            legend.appendChild(legendItem);
 
-          seenClasses.add(className);
+            seenClasses.add(className);
         }
       };
       break;
