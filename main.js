@@ -344,6 +344,8 @@ function draw() {
     legendContainer.style.display = "none"; // Hide legend for other views
   }
 
+
+
   switch (colorMethod) {
     case 'active':
       changeColor = function (node) {
