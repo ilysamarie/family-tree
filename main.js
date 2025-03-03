@@ -364,56 +364,60 @@ function draw() {
       break;
 
       case 'pledgeClass':
-        let seenClasses = new Set(); // Track unique pledge classes
-        let naColor = "#D3D3D3";  // Light grey for "N/A"
+        case 'pledgeClass':
+    let seenClasses = new Set(); // Track unique pledge classes
+    let naColor = "#D3D3D3";  // Light grey for "N/A"
 
-        // Clear and show legend only when in Pledge Class mode
-        legend.innerHTML = "";
-        legendContainer.style.display = "block";
+    // Clear and show legend only when in Pledge Class mode
+    legend.innerHTML = "";
+    legendContainer.style.display = "block";  // Ensure legend is visible
 
-        changeColor = function (node) {
-            let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
+    changeColor = function (node) {
+        let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
 
-            // Assign a unique color for each pledge class, defaulting to light grey if missing
-            if (!pledgeClassColorGlobal[className] && className !== "N/A") {
-                pledgeClassColorGlobal[className] = getNewPledgeClassColor();
-            }
+        // Assign a unique color for each pledge class, defaulting to light grey if missing
+        if (!pledgeClassColorGlobal[className] && className !== "N/A") {
+            pledgeClassColorGlobal[className] = getNewPledgeClassColor();
+        }
 
-            let classColor = className === "N/A" ? naColor : pledgeClassColorGlobal[className];
-            let bgColor = tinycolor(classColor);
-            let textColor = bgColor.isDark() ? "#ffffff" : "#000000"; // White text for dark colors
+        let classColor = className === "N/A" ? naColor : pledgeClassColorGlobal[className];
+        let bgColor = tinycolor(classColor);
+        let textColor = bgColor.isDark() ? "#ffffff" : "#000000"; // White text for dark colors
 
-            node.color = classColor;
-            node.font = { color: textColor }; // Apply dynamic text color
-            nodesDataSet.update(node);
+        node.color = classColor;
+        node.font = { color: textColor }; // Apply dynamic text color
+        nodesDataSet.update(node);
 
-            // Add unique pledge class colors to the legend
-            if (!seenClasses.has(className)) {
-                let legendItem = document.createElement("div");
-                legendItem.style.display = "flex";
-                legendItem.style.alignItems = "center";
-                legendItem.style.marginBottom = "5px";
+        // Add unique pledge class colors to the legend
+        if (!seenClasses.has(className)) {
+            let legendItem = document.createElement("div");
+            legendItem.style.display = "flex";
+            legendItem.style.alignItems = "center";
+            legendItem.style.marginBottom = "5px";
 
-                let colorBox = document.createElement("div");
-                colorBox.style.width = "15px";
-                colorBox.style.height = "15px";
-                colorBox.style.backgroundColor = classColor;
-                colorBox.style.marginRight = "10px";
-                colorBox.style.border = "1px solid black";
+            let colorBox = document.createElement("div");
+            colorBox.style.width = "15px";
+            colorBox.style.height = "15px";
+            colorBox.style.backgroundColor = classColor;
+            colorBox.style.marginRight = "10px";
+            colorBox.style.border = "1px solid black";
 
-                let labelText = document.createElement("span");
-                labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
+            let labelText = document.createElement("span");
+            labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
 
-                legendItem.appendChild(colorBox);
-                legendItem.appendChild(labelText);
-                legend.appendChild(legendItem);
+            legendItem.appendChild(colorBox);
+            legendItem.appendChild(labelText);
+            legend.appendChild(legendItem);
 
-                seenClasses.add(className);
-            }
-        };
+            seenClasses.add(className);
+        }
+    };
 
-        nodesGlobal.forEach(changeColor); // Apply pledge class colors
-        break;
+    // Ensure legend container is properly shown
+    legendContainer.style.display = "block";
+    nodesGlobal.forEach(changeColor); // Apply pledge class colors
+    break;
+
 
 
     default: // 'family'
