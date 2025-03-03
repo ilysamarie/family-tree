@@ -362,54 +362,56 @@ function draw() {
       break;
 
       case 'pledgeClass':
-        let seenClasses = new Set(); // Keep track of already added pledge classes
-        let naColor = "lightgrey";  // Color for "N/A"
+        let seenClasses = new Set(); // Track unique pledge classes
+        let naColor = "lightgrey";  // Default for "N/A"
+
+        // Clear and show legend only when in Pledge Class mode
+        legend.innerHTML = "";
+        legendContainer.style.display = "block";
 
         changeColor = function (node) {
-          let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
+            let className = node.pledgeclass ? node.pledgeclass.toLowerCase() : "N/A";
 
-          // Ensure each pledge class gets a unique color
-          if (!pledgeClassColorGlobal[className]) {
-              pledgeClassColorGlobal[className] = getNewPledgeClassColor();
-          }
+            // Ensure each pledge class gets a unique color
+            if (!pledgeClassColorGlobal[className]) {
+                pledgeClassColorGlobal[className] = getNewPledgeClassColor();
+            }
 
-          let classColor = pledgeClassColorGlobal[className] || naColor;
+            let classColor = pledgeClassColorGlobal[className] || naColor;
+            let bgColor = tinycolor(classColor);
+            let textColor = bgColor.isDark() ? "#ffffff" : "#000000"; // White text for dark colors
 
-          // Ensure text color adapts to background brightness
-          let bgColor = tinycolor(classColor);
-          let textColor = bgColor.isDark() ? "#ffffff" : "#000000";
+            node.color = classColor; // Apply correct pledge class color
+            node.font = { color: textColor }; // Apply text color dynamically
+            nodesDataSet.update(node);
 
-          node.color = classColor; // Apply correct pledge class color
-          node.font = { color: textColor }; // Apply correct text color
-          nodesDataSet.update(node);
+            // Add unique pledge class colors to the legend
+            if (!seenClasses.has(className)) {
+                let legendItem = document.createElement("div");
+                legendItem.style.display = "flex";
+                legendItem.style.alignItems = "center";
+                legendItem.style.marginBottom = "5px";
 
-          // Add unique pledge class colors to the legend
-          if (!seenClasses.has(className)) {
-              let legendItem = document.createElement("div");
-              legendItem.style.display = "flex";
-              legendItem.style.alignItems = "center";
-              legendItem.style.marginBottom = "5px";
+                let colorBox = document.createElement("div");
+                colorBox.style.width = "15px";
+                colorBox.style.height = "15px";
+                colorBox.style.backgroundColor = classColor;
+                colorBox.style.marginRight = "10px";
+                colorBox.style.border = "1px solid black";
 
-              let colorBox = document.createElement("div");
-              colorBox.style.width = "15px";
-              colorBox.style.height = "15px";
-              colorBox.style.backgroundColor = classColor;
-              colorBox.style.marginRight = "10px";
-              colorBox.style.border = "1px solid black";
+                let labelText = document.createElement("span");
+                labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
 
-              let labelText = document.createElement("span");
-              labelText.innerText = className === "N/A" ? "N/A (Not Listed)" : node.pledgeclass;
+                legendItem.appendChild(colorBox);
+                legendItem.appendChild(labelText);
+                legend.appendChild(legendItem);
 
-              legendItem.appendChild(colorBox);
-              legendItem.appendChild(labelText);
-              legend.appendChild(legendItem);
+                seenClasses.add(className);
+            }
+        };
 
-              seenClasses.add(className);
-          }
-      };
-
-      nodesGlobal.forEach(changeColor); // Apply pledge class colors
-      break;
+        nodesGlobal.forEach(changeColor); // Apply pledge class colors
+        break;
 
     default: // 'family'
     case 'family':
