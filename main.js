@@ -336,8 +336,6 @@ function draw() {
 
   // Clear existing legend content
   legend.innerHTML = "";
-  legendContainer.style.display = "block"; // Ensure legend is shown
-  legendContainer.style.border = "1px solid black"; // Make sure it's visible
 
 
   switch (colorMethod) {
